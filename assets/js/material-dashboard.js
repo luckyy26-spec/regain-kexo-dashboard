@@ -1,17 +1,3 @@
-// =========================================================
-// Material Dashboard 2 - v3.1.0
-// =========================================================
-
-// Product Page: https://www.creative-tim.com/product/material-dashboard
-// Copyright 2023 Creative Tim (https://www.creative-tim.com)
-// Licensed under MIT (https://github.com/creativetimofficial/material-dashboard/blob/master/LICENSE.md)
-
-// Coded by www.creative-tim.com
-
-// =========================================================
-
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
 "use strict";
 (function() {
   var isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
@@ -35,7 +21,7 @@
 
     if (document.getElementsByClassName('fixed-plugin')[0]) {
       var fixedplugin = document.querySelector('.fixed-plugin');
-      var ps3 = new PerfectScrollbar(fixedplugin);
+      var ps3 = new PerfectScrollbar(fixedplugin); 
     };
   };
 })();
