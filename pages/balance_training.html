@@ -1,0 +1,80 @@
+
+{% extends 'base.html' %}
+
+{% block title%} Balance Training {% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+      <div class="card mt-4">
+
+        <div class="card-header p-3">
+          <h5 class="mb-0">Sit to Stand</h5>
+        </div>
+
+        <div class="card-body p-3">
+          <div class="ratio ratio-16x9">
+            <video controls width="100%">
+              <source src="{{url_for('static', filename='sit-to-stand.mp4')}}" type="video/mp4"> 
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          
+          <div class="card mt-4">
+            <div class="card-header p-3">
+              <h4 class="text-success mb-3">Reminder</h4>
+                <p class="text-lg mb-2">
+                  1. Play the video instruction as your reference.
+                </p>
+                <p class="text-lg mb-2">
+                  2. Then press the 1-minute timer once you are ready.
+                </p>
+                <p class="text-lg mb-2">
+                  3. Ensure that the chair you are using is stable and placed on a flat surface to avoid slipping.
+                </p>
+                <p class="text-lg mb-2">
+                  4. Sit towards the front edge of the chair with your feet flat on the floor and shoulder-width apart.
+                </p>
+                <p class="text-lg mb-2">
+                  5. Keep your back straight and engage your core muscles throughout the exercise.
+                </p>
+                <p class="text-lg mb-0">
+                  6. If you feel any discomfort or dizziness, stop immediately and consult a healthcare professional.
+                </p>
+            </div>      
+          </div>
+
+          <div class="container d-flex justify-content-center py-4">
+            <div class="col-lg-3 col-sm-6 col-12 text-center">
+              <button id="countdown-btn" class="btn bg-gradient-success w-100 mb-0" type="button">1 minute</button>
+            </div>
+          </div>
+
+          <script>
+            document.getElementById("countdown-btn").addEventListener("click", function() {
+              let countdownTime = 60; // 1 minute = 60 seconds
+              const button = this;
+              button.disabled = true; // Disable the button during countdown
+          
+              const interval = setInterval(function() {
+                countdownTime--;
+                button.textContent = countdownTime + " seconds"; // Update text only
+          
+                if (countdownTime <= 0) {
+                  clearInterval(interval);
+                  button.textContent = "1 minute"; // Reset text to original
+                  button.disabled = false; // Enable the button again
+                }
+              }, 1000);
+            });
+          </script> 
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+    

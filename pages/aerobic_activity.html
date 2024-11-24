@@ -1,0 +1,61 @@
+
+{% extends 'base.html' %}
+
+{% block title%} Aerobic Activity {% endblock %}
+
+{% block content %}
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="card mt-4">
+
+            <div class="card-header p-3">
+              <h5 class="mb-0">Assisted Walk</h5>
+            </div>
+
+            <div class="card-body p-3">
+
+              <div class="ratio ratio-16x9">
+                <video controls width="100%">
+                  <source src="{{url_for('static', filename='aerobic.mp4')}}" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              
+              <div class="card mt-4">
+
+                <div class="card-header p-3">
+                  <h5 class="mb-0">Assisted Walking and Object Touching Exercise Guide</h5>
+                </div>
+
+                <div class="card-body">
+                  <h6 class="text-primary mb-3">Purpose:</h6>
+                  <p>To improve mobility, balance, and coordination through guided walking and reaching exercises.</p>
+              
+                  <h6 class="text-success mb-3">Instructions for the Assisting Person:</h6>
+                  <ol>
+                    <li><b>Provide Support:</b> Stand to the side or slightly behind the patient, offering support under their arm or on their back, depending on their balance needs.</li>
+                    <li><b>Ensure Safety:</b> Make sure the area is free from obstacles and that there is enough space to walk and maneuver comfortably.</li>
+                    <li><b>Encourage Proper Posture:</b> Remind the patient to keep their back straight and look forward rather than down to help with balance.</li>
+                    <li><b>Walking Guidance:</b> Walk slowly alongside the patient, adjusting your speed to match theirs. Provide gentle encouragement to maintain a steady pace.</li>
+                  </ol>
+              
+                  <h6 class="text-success mb-3">Instructions for the Patient:</h6>
+                  <ol>
+                    <li><b>Focus on Each Step:</b> Concentrate on lifting your feet and placing them carefully to maintain balance.</li>
+                    <li><b>Reaching for the Object:</b> Once in front of the ball or object, extend your arm slowly and steadily to touch it. Engage your core muscles to help with balance.</li>
+                    <li><b>Return to Neutral Position:</b> After touching the object, carefully bring your arm back and prepare for the next step.</li>
+                    <li><b>Rest as Needed:</b> Take breaks when necessary, and listen to your body to avoid overexertion.</li>
+                  </ol>
+              
+                  <div class="alert alert-warning mt-3" role="alert">
+                    <strong>Important:</strong> Always ensure the exercise is done in a safe environment and consult a healthcare professional if there are any concerns or discomfort.
+                  </div>
+                  
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </div>   
+{% endblock %}
+    
