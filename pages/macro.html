@@ -48,6 +48,21 @@
   </aside>
 {% endmacro %}
 
-{% macro knee_data(name, angle) %}
-
+<!-- Knee Data -->
+{% macro knee_data(data_name, data) %}
+    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 knee-data-item">
+        <div class="card">
+            <div class="card-header card-footer p-2 ps-3">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="text-sm mb-0 text-capitalize">{{ data_name }}</p>
+                        <h4 class="mb-0">{{ data }}</h4>
+                    </div>
+                    <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
+                        <i class="material-icons opacity-10">sensors</i>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
 {% endmacro %}
