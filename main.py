@@ -57,7 +57,11 @@ if __name__ == '__main__':
 @socketio.on('connect')
 def handle_connect():
     print('Client connected')
-
+    
+@socketio.on('disconnect')
+def handle_disconnect():
+    print('Client disconnected')
+    
 @socketio.on('start_data_stream')
 def stream_knee_data():
     while True:
@@ -67,9 +71,11 @@ def stream_knee_data():
             if data:
                 socketio.emit('knee_data', data)
             else:
+                socketio.emit('knee_data', {"error": "No data available"})
                 print("No data to emit")
         except Exception as e:
             print(f"Error in stream_knee_data: {e}")
+            socketio.emit('knee_data', {"error": f"Error: {str(e)}"})
         socketio.sleep(0.1)
 
 if __name__ == "__main__":
