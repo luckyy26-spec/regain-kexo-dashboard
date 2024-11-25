@@ -46,70 +46,13 @@
   <!-- Knee Data -->
   <div class="row mb-2">
 
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
-        <div class="card-header card-footer p-2 ps-3">
-          <div class="d-flex justify-content-between">
-            <div>
-              <p class="text-sm mb-0 text-capitalize">Thigh Angle</p>
-              <h4 class="mb-0">84 Degrees</h4>
-            </div>
-            <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-              <i class="material-icons opacity-10">sensors</i>
-            </div>
-          </div>
-        </div>
-      </div>  
+    <div id="knee_data_container" class="row">
+      <!-- Placeholders, replaced by socketio script -->
+      {{ knee_data("Thigh Angle", "Loading...") }}
+      {{ knee_data("Knee Angle", "Loading...") }}
+      {{ knee_data("Shin Angle", "Loading...") }}
+      {{ knee_data("Gait Phase", "Loading...") }}
     </div>
-
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
-        <div class="card-header card-footer p-2 ps-3">
-          <div class="d-flex justify-content-between">
-            <div>
-              <p class="text-sm mb-0 text-capitalize">Knee Angle</p>
-              <h4 class="mb-0">18 Degrees</h4>
-            </div>
-            <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-              <i class="material-icons opacity-10">sensors</i>
-            </div>
-          </div>
-        </div>
-      </div>  
-    </div>
-
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
-        <div class="card-header card-footer p-2 ps-3">
-          <div class="d-flex justify-content-between">
-            <div>
-              <p class="text-sm mb-0 text-capitalize">Shin Angle</p>
-              <h4 class="mb-0">101 Degrees</h4>
-            </div>
-            <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-              <i class="material-icons opacity-10">sensors</i>
-            </div>
-          </div>
-        </div>
-      </div>  
-    </div>
-    
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-      <div class="card">
-        <div class="card-header card-footer p-2 ps-3">
-          <div class="d-flex justify-content-between">
-            <div>
-              <p class="text-sm mb-0 text-capitalize">Gait Phase</p>
-              <h4 class="mb-0">Initial Swing</h4>
-            </div>
-            <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-              <i class="material-icons opacity-10">sensors</i>
-            </div>
-          </div>
-        </div>
-      </div>  
-    </div>
-  </div>
 
   <!-- Live Visualization -->
   <div class="row mb-4">
