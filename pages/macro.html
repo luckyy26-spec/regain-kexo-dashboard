@@ -13,7 +13,6 @@
 {% endmacro %}
 
 {% macro side_navbar(page1, page2) %}
-<!-- Side Navbar Pages -->
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2 bg-white my-2" id="sidenav-main">
 
     <!-- Title and Icon -->
@@ -48,17 +47,54 @@
   </aside>
 {% endmacro %}
 
-<!-- Knee Data -->
-{% macro knee_data(data_name, data) %}
-    <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 knee-data-item">
+{% macro info_box(title, content) %}
+    <div class="col mb-4">
         <div class="card">
-            <div class="card-header card-footer p-2 ps-3">
+            <div class="card-header p-4">
+                <div class="icon-lg position-absolute">
+                    <i class="material-icons opacity-10">weekend</i>
+                </div>
+                <div class="pt-5">
+                    <h5 class="mb-0">{{title}}</h5>
+                </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-4">
+                <!-- filter data to allow line breaks, and change * bullet design -->
+                <p>{{content | replace('\n', '<br>') | replace( '*','<span class="text-success text-sm font-weight-bolder">◉ </span>') | safe }}</p>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro knee_data(data_name, data) %}
+    <div class="col mb-4 knee-data-item">
+        <div class="card">
+            <div class="card-header card-footer p-4 ps-4">
                 <div class="d-flex justify-content-between">
                     <div>
                         <p class="text-sm mb-0 text-capitalize">{{ data_name }}</p>
                         <h4 class="mb-0">{{ data }}</h4>
                     </div>
-                    <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
+                    <div>
+                        <i class="material-icons opacity-10">sensors</i>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+{% endmacro %}
+
+{% macro knee_chart(data_name, data) %}
+    <div class="col mb-4">
+        <div class="card">
+            <div class="card-header card-footer p-4 ps-4">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="text-sm mb-0 text-capitalize">{{ data_name }}</p>
+                        <h4 class="mb-0">{{ data }}</h4>
+                    </div>
+                    <div>
                         <i class="material-icons opacity-10">sensors</i>
                     </div>
                 </div>

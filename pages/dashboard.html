@@ -5,47 +5,26 @@
 {% block content %}
 
   <!-- Welcome -->
-  <div class="row mb-2">
-  
-      <div class="col-lg-6 col-md-4 mb-4">
-          <div class="card">
-              <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                  <i class="material-icons opacity-10">weekend</i>
-              </div>
-              <div class="pt-6">
-                  <h5 class="mb-0">Welcome to Regain K.Exo</h5>
-              </div>
-              </div>
-              <hr class="dark horizontal my-0">
-              <div class="card-footer p-3">
-              <p class="mb-0">Explore balance training, strengthening, aerobic activities, and auto assist on our user-friendly platform. Track progress, recovery time, and customize settings. Start your journey of mobility and a healthier lifestyle today!</p>
-              </div>
-          </div>
-      </div>
+  {% from 'macro.html' import info_box %}
+  <div class="row">
 
-      <div class="col-lg-6 col-md-4 mb-4">
-          <div class="card">
-              <div class="card-header p-3 pt-2">
-              <div class="icon icon-lg icon-shape bg-gradient-dark shadow-dark text-center border-radius-xl mt-n4 position-absolute">
-                  <i class="material-icons opacity-10">weekend</i>
-              </div>
-              <div class="pt-6">
-                  <h5 class="mb-0">READ ME</h5>
-              </div>
-              </div>
-              <hr class="dark horizontal my-0">
-              <div class="card-footer p-3">
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">◉ </span>It is highly encouraged to do stretching first before performing exercises.</p>
-              <p class="mb-0"><span class="text-success text-sm font-weight-bolder">◉ </span>Stay hydrated before and during exercises, especially in warm environments or during prolonged sessions.</p>
-              </div>
-          </div>
-      </div>      
+    {{ info_box(
+      "Welcome to Regain K.Exo",
+      "Explore balance training, strengthening, aerobic activities, and auto assist on our user-friendly platform. Track progress, recovery time, and customize settings. Start your journey of mobility and a healthier lifestyle today!"
+      )
+    }}
+
+    {{ info_box(
+      "Important Reminders",
+      "* It is highly encouraged to do stretching first before performing exercises.            
+       * Stay hydrated before and during exercises, especially in warm environments or during prolonged sessions."
+      )
+    }}
   </div>
-
+  
   <!-- Knee Data -->
-  <div class="row mb-2">
-
+  {% from 'macro.html' import knee_data %}
+  <div>
     <div id="knee_data_container" class="row">
       <!-- Placeholders, replaced by socketio script -->
       {{ knee_data("Thigh Angle", "Loading...") }}
@@ -69,30 +48,30 @@
           if (data) {
 
               // Update the knee data container div
-              const createCard = (name, value) => `
-                  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 knee-data-item">
-                      <div class="card">
-                          <div class="card-header card-footer p-2 ps-3">
-                              <div class="d-flex justify-content-between">
-                                  <div>
-                                      <p class="text-sm mb-0 text-capitalize">${name}</p>
-                                      <h4 class="mb-0">${value}</h4>
-                                  </div>
-                                  <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
-                                      <i class="material-icons opacity-10">sensors</i>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>  
+              const kneeData = (name, value) => `
+                  <div class="col knee-data-item">
+                    <div class="card">
+                        <div class="card-header card-footer p-4 ps-4">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <p class="text-sm mb-0 text-capitalize">${name}</p>
+                                    <h4 class="mb-0">${value}</h4>
+                                </div>
+                                <div>
+                                    <i class="material-icons opacity-10">sensors</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
                   </div>`;
   
               // Update the knee data container
               const container = document.getElementById('knee_data_container');
               container.innerHTML = `
-                  ${createCard('Thigh Angle', `${data.pitch_thigh}°`)}
-                  ${createCard('Knee Angle', `${data.knee_angle}°`)}
-                  ${createCard('Shin Angle', `${data.pitch_shin}°`)}
-                  ${createCard('Gait Phase', `${data.gait_phase}`)}
+                  ${kneeData('Thigh Angle', `${data.pitch_thigh}°`)}
+                  ${kneeData('Knee Angle', `${data.knee_angle}°`)}
+                  ${kneeData('Shin Angle', `${data.pitch_shin}°`)}
+                  ${kneeData('Gait Phase', `${data.gait_phase}`)}
               `;
           }
       });
@@ -100,36 +79,30 @@
      -->   
   </div>
 
-  
   <!-- Live Visualization -->
-  <div class="row mb-4">
-
+  {% from 'macro.html' import knee_chart %}
+  <div class="row">
+    <div id="knee_data_container" class="column">
+      <!-- Placeholders, replaced by socketio script -->
+      {{ knee_chart("Thigh Chart", "Loading...") }}
+      {{ knee_chart("Knee Chart", "Loading...") }}
+      {{ knee_chart("Shin Chart", "Loading...") }}
+    </div>
+  
+    <!-- 
     <div class="col-lg-6 col-md-6 mt-4 mb-4">
       <div class="card">
         <div class="card-body">
           <h6 class="mb-0">Daily Progress</h6>
           <div class="pe-2">
             <div class="chart">
-              <canvas id="chart-bars" class="chart-canvas" height="297"></canvas> <!-- for some reason it needs to be 197 to match the second graph -->
+              <canvas id="chart-bars" class="chart-canvas" height="290"></canvas> 
             </div>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="col-lg-6 col-md-6 mt-4 mb-4">
-      <div class="card">
-        <div class="card-body">
-          <h6 class="mb-0">Live Sensor Graph</h6>
-          <div class="pe-2">
-            <div class="chart">
-              <canvas id="chart-bars" class="chart-canvas" height="290"></canvas>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    -->
   </div>
-      
+    
 {% endblock %}

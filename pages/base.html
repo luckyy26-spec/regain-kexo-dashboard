@@ -29,12 +29,12 @@
     <link id="pagestyle" rel="stylesheet" href="{{ url_for('static', filename='css/material-dashboard.css') }}"> <!-- Material CSS Files --> 
   </head>
 
-<body class="g-sidenav-show  bg-gray-200">
+<body class="g-sidenav-show bg-gray-200">
 
   <!-- Side Navbar Pages -->
   {{ side_navbar(pages, exercises) }}
 
-  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
 
     <!-- Top Navbar (only one element)-->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-3 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
@@ -62,8 +62,9 @@
     
     <div class="container-fluid py-2">
 
-      <!-- content block for child pages -->
-      {% block content %}{% endblock %}
+      {% block content %}
+        <!-- content block for child pages -->
+      {% endblock %}
 
       <!-- Footer -->
       <footer class="footer py-4">
