@@ -54,6 +54,53 @@
       {{ knee_data("Gait Phase", "Loading...") }}
     </div>
 
+    <!-- socketio script, displays live sensor data -->
+    <!-- 
+    <script>
+      const socket = io();
+  
+      socket.on('connect', () => {
+          console.log('Connected to server');
+          socket.emit('start_data_stream');
+      });
+  
+      socket.on('knee_data', (data) => {
+          console.log('Received data:', data);
+          if (data) {
+
+              // Update the knee data container div
+              const createCard = (name, value) => `
+                  <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4 knee-data-item">
+                      <div class="card">
+                          <div class="card-header card-footer p-2 ps-3">
+                              <div class="d-flex justify-content-between">
+                                  <div>
+                                      <p class="text-sm mb-0 text-capitalize">${name}</p>
+                                      <h4 class="mb-0">${value}</h4>
+                                  </div>
+                                  <div class="icon icon-md icon-shape bg-gradient-dark shadow-dark shadow text-center border-radius-lg">
+                                      <i class="material-icons opacity-10">sensors</i>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>  
+                  </div>`;
+  
+              // Update the knee data container
+              const container = document.getElementById('knee_data_container');
+              container.innerHTML = `
+                  ${createCard('Thigh Angle', `${data.pitch_thigh}°`)}
+                  ${createCard('Knee Angle', `${data.knee_angle}°`)}
+                  ${createCard('Shin Angle', `${data.pitch_shin}°`)}
+                  ${createCard('Gait Phase', `${data.gait_phase}`)}
+              `;
+          }
+      });
+    </script>
+     -->   
+  </div>
+
+  
   <!-- Live Visualization -->
   <div class="row mb-4">
 
