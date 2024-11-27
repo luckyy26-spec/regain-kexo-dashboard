@@ -48,7 +48,7 @@
 {% endmacro %}
 
 {% macro info_box(title, content) %}
-    <div class="col mb-4">
+    <div class="col-6 mb-4">
         <div class="card">
             <div class="card-header">
                 <div class="pt-4">
@@ -65,25 +65,7 @@
 {% endmacro %}
 
 {% macro knee_data(data_name, data) %}
-    <div class="col mb-4 knee-data-item">
-        <div class="card">
-            <div class="card-header card-footer p-4 ps-4">
-                <div class="d-flex justify-content-between">
-                    <div>
-                        <p class="text-sm mb-0 text-capitalize">{{ data_name }}</p>
-                        <h4 class="mb-0">{{ data }}</h4>
-                    </div>
-                    <div>
-                        <i class="material-icons opacity-10">sensors</i>
-                    </div>
-                </div>
-            </div>
-        </div>  
-    </div>
-{% endmacro %}
-
-{% macro knee_chart(data_name, data) %}
-    <div class="col mb-4">
+    <div class="col-3 mb-4 knee-data-item">
         <div class="card">
             <div class="card-header card-footer p-4 ps-4">
                 <div class="d-flex justify-content-between">

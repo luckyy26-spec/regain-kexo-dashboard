@@ -1,6 +1,7 @@
 from flask import Flask, render_template
-# from flask_socketio import SocketIO
+from flask_socketio import SocketIO
 # from knee_data import get_knee_data
+
 
 app = Flask(__name__, 
             template_folder='pages', 
@@ -8,7 +9,7 @@ app = Flask(__name__,
             static_url_path='/assets'
             )
 
-# socketio = SocketIO(app)
+socketio = SocketIO(app)
 
 pages = [{
         "page_url": "dashboard",
@@ -29,7 +30,7 @@ exercises = [{
         "page_icon": "balance",
         "page_name": "Balance Training"
     }]
-
+    
 @app.route('/')
 def home():
     return render_template("dashboard.html", pages=pages, exercises=exercises)
@@ -50,10 +51,6 @@ def aerobic_activity():
 def recovery_time():
     return render_template('recovery_time.html', pages=pages, exercises=exercises)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
-    
-'''
 @socketio.on('connect')
 def handle_connect():
     print('Client connected')
@@ -62,6 +59,7 @@ def handle_connect():
 def handle_disconnect():
     print('Client disconnected')
     
+'''
 @socketio.on('start_data_stream')
 def stream_knee_data():
     while True:
@@ -77,9 +75,9 @@ def stream_knee_data():
             print(f"Error in stream_knee_data: {e}")
             socketio.emit('knee_data', {"error": f"Error: {str(e)}"})
         socketio.sleep(0.1)
+'''
 
 if __name__ == "__main__":
     billy_host = '192.168.221.24' # host=billy_host
+    eye_foam = '172.20.10.7' # host=eye_foam
     socketio.run(app, debug=True, allow_unsafe_werkzeug=True) # allow_unsafe_werkzeug=True in order to run on thonny shell
-'''
-
