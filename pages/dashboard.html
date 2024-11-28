@@ -8,7 +8,7 @@
   <!-- Welcome -->
   {% from 'macro.html' import info_box %}
   <div class="row">
-
+    
     {{ info_box(
       "Welcome to Regain K.Exo",
       "Explore balance training, strengthening, aerobic activities, and auto assist on our user-friendly platform. Track progress, recovery time, and customize settings. Start your journey of mobility and a healthier lifestyle today!"
@@ -26,6 +26,11 @@
   <!-- Knee Data -->
   {% from 'macro.html' import knee_data %}
   <div>
+
+    <div class="ms-3 mb-3">
+      <h3 class="mb-0 h4 font-weight-bolder">Knee Data</h3>
+    </div>
+    
     <div id="knee_data_container" class="row">
       <!-- Placeholders, replaced by socketio script -->
       {{ knee_data("Thigh Angle", "N/A") }}
@@ -40,14 +45,22 @@
 
   <!-- Live Visualization -->
   <div class="row">
+
+    <div class="ms-3 mb-3">
+      <h3 class="mb-0 h4 font-weight-bolder">Data Chart</h3>
+    </div>
+
     <div class="col">
       <div class="card">
         <div class="card-body">
-          <p class="text-sm mb-0 text-capitalize">Live Chart</p>
-          <canvas id="chart-line" class="chart-canvas" height="440" style="width: 100%;"></canvas>
+          <div class="chart">
+            <canvas id="chart-line" class="chart-canvas" height="440" style="width: 100%;"></canvas>
+          </div>
         </div>
       </div>
     </div>
+
+
   </div>
   
   <script src="{{ url_for('static', filename='js/chart-design.js') }}"></script>
