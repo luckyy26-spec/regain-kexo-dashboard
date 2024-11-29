@@ -4,7 +4,7 @@
     {% for page in pages %}
     <li class="nav-item">
         <a class="nav-link text-dark" href="{{ url_for(page['page_url']) }}">
-            <i class="material-icons opacity-5">{{ page['page_icon'] }}</i>
+            <i class="material-icons opacity-10">{{ page['page_icon'] }}</i>
             <span class="nav-link-text ms-1">{{ page['page_name'] }}</span>
         </a>
     </li>
@@ -29,6 +29,16 @@
       <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             {{ page_iter(page1) }}
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="#">
+                    <i class="material-icons opacity-10">notifications</i>
+                  <span class="nav-link-text ms-1">Auto-Assist</span>
+                  <div class="form-check form-switch ms-3">
+                    <input class="form-check-input" type="checkbox" id="motorToggle" onclick="toggleMotor(this.checked)">
+                    <label class="form-check-label" for="motorToggle"></label>
+                  </div>
+                </a>
+              </li>
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-5">Exercises</h6>
             </li>
