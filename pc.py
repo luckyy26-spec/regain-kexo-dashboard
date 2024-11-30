@@ -28,7 +28,7 @@ exercises = [{
     
 @app.route('/')
 def home():
-    return render_template("dashboard.html", pages=pages, exercises=exercises)
+    return render_template("new_dash.html", pages=pages, exercises=exercises)
 
 @app.route('/dashboard')
 def dashboard():

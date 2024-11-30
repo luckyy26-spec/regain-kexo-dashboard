@@ -5,8 +5,10 @@
 {% block content %}
   <script src="{{ url_for('static', filename='js/socket.js') }}"></script>  
 
-  <!-- Welcome -->
   {% from 'macro.html' import info_box %}
+  {% from 'macro.html' import knee_data %}
+
+  <!-- Welcome -->
   <div class="row">
     
     {{ info_box(
@@ -24,9 +26,7 @@
   </div>
   
   <!-- Knee Data -->
-  {% from 'macro.html' import knee_data %}
   <div>
-
     <div class="ms-3 mb-3">
       <h3 class="mb-0 h4 font-weight-bolder">Knee Data</h3>
     </div>
@@ -59,7 +59,6 @@
         </div>
       </div>
     </div>
-
 
   </div>
   
