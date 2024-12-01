@@ -22,7 +22,7 @@ previous_pitch_shin = 0
 time_prev = time.time()
 
 # Loads the model using joblib
-model_name = 'rf_model.sav'
+model_name = 'rfc_model.sav'
 model = joblib.load(open(model_name, 'rb'))
 
 # Classifies gait phase based on sensor data using random forest model
@@ -129,6 +129,7 @@ def get_knee_data():
             "knee_angle": knee_angle,
             "gait_phase": gait_phase
         }
+        
     except Exception as e:
         print(f"Error in get_knee_data: {e}")
         return None
