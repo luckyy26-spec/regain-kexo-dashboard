@@ -1,10 +1,6 @@
 from flask import Flask, render_template
-from flask_socketio import SocketIO, emit
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
-import os
+from flask_socketio import SocketIO
+from knee_data import get_knee_data
 
 app = Flask(__name__,
             template_folder='pages',
@@ -14,25 +10,28 @@ app = Flask(__name__,
 socketio = SocketIO(app)
 
 pages = [{
-    "page_url": "dashboard",
-    "page_icon": "dashboard",
-    "page_name": "Dashboard"
-}, {
-    "page_url": "recovery_time",
-    "page_icon": "view_in_ar",
-    "page_name": "Recovery Time"
-}]
+        "page_url": "dashboard",
+        "page_icon": "dashboard",
+        "page_name": "Dashboard"
+    },{
+        "page_url": "sensor_data",
+        "page_icon": "sensors",
+        "page_name": "Sensor Data"
+    },{
+        "page_url": "recovery_time",
+        "page_icon": "view_in_ar",
+        "page_name": "Recovery Time"
+    }]
 
 exercises = [{
-    "page_url": "aerobic_activity",
-    "page_icon": "receipt_long",
-    "page_name": "Aerobic Activity"
-}, {
-    "page_url": "balance_training",
-    "page_icon": "balance",
-    "page_name": "Balance Training"
-}]
-
+        "page_url": "assisted_walking",
+        "page_icon": "receipt_long",
+        "page_name": "Assisted Walking"
+    },{
+        "page_url": "sit_to_stand",
+        "page_icon": "balance",
+        "page_name": "Sit to Stand"
+    }]
 
 # Function to train model
 def train_model():

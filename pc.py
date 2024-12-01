@@ -21,13 +21,13 @@ pages = [{
     }]
 
 exercises = [{
-        "page_url": "aerobic_activity",
+        "page_url": "assisted_walking",
         "page_icon": "receipt_long",
-        "page_name": "Aerobic Activity"
+        "page_name": "Assisted Walking"
     },{
-        "page_url": "balance_training",
+        "page_url": "sit_to_stand",
         "page_icon": "balance",
-        "page_name": "Balance Training"
+        "page_name": "Sit to Stand"
     }]
     
 @app.route('/')
@@ -46,13 +46,13 @@ def recovery_time():
 def sensor_data():
     return render_template('sensor_data.html', pages=pages, exercises=exercises)
 
-@app.route('/balance_training')
-def balance_training():
-    return render_template('balance_training.html', pages=pages, exercises=exercises)
+@app.route('/sit_to_stand')
+def sit_to_stand():
+    return render_template('exer_sit_to_stand.html', pages=pages, exercises=exercises)
 
-@app.route('/aerobic_activity')
-def aerobic_activity():
-    return render_template('aerobic_activity.html', pages=pages, exercises=exercises)
+@app.route('/assisted_walking')
+def assisted_walking():
+    return render_template('exer_assisted_walking.html', pages=pages, exercises=exercises)
 
 if __name__ == "__main__":
     app.run(debug=True) 
