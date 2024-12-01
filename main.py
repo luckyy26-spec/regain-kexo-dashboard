@@ -11,19 +11,6 @@ app = Flask(
 )
 socketio = SocketIO(app)
 
-# Directory to save plots
-PLOT_DIR = 'assets/plots'
-os.makedirs(PLOT_DIR, exist_ok=True)
-
-# Load and train the Random Forest model
-data = pd.read_csv('regression_data.csv')
-X = data[['Max_knee_flexion']]
-y = data['Estimated_recovery_time_week']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-rf_regressor = RandomForestRegressor(n_estimators=100, random_state=42)
-rf_regressor.fit(X_train, y_train)
-
-# Define pages
 pages = [{
         "page_url": "dashboard",
         "page_icon": "dashboard",
@@ -52,21 +39,9 @@ exercises = [{
 def home():
     return render_template("dashboard.html", pages=pages, exercises=exercises)
 
-
 @app.route('/dashboard')
 def dashboard():
     return render_template('dashboard.html', pages=pages, exercises=exercises)
-
-
-@app.route('/balance_training')
-def balance_training():
-    return render_template('balance_training.html', pages=pages, exercises=exercises)
-
-
-@app.route('/aerobic_activity')
-def aerobic_activity():
-    return render_template('aerobic_activity.html', pages=pages, exercises=exercises)
-
 
 @app.route('/measure_recovery')
 def recovery_time():
