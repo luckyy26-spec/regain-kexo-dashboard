@@ -112,4 +112,6 @@ def handle_disconnect():
     print('Client disconnected')
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True, host='0.0.0.0')
+    billy_host = '192.168.221.24'  # host=billy_host
+    eye_foam = '172.20.10.7'  # host=eye_foam
+    socketio.run(app, debug=True, allow_unsafe_werkzeug=True, host='0.0.0.0')  # allow_unsafe_werkzeug=True to run on Thonny shell
