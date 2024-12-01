@@ -73,7 +73,7 @@ def recovery_time():
 def stream_knee_data():
     try:
         # Example knee angle data over time
-        days = np.arange(1, 16)  # Example days 1 to 15
+        days = np.arange(1, 16) 
         knee_angles = np.array([60, 65, 70, 75, 80, 82, 85, 88, 90, 89, 87, 85, 83, 80, 78])
 
         # Predict recovery time based on the maximum knee angle
@@ -97,7 +97,7 @@ def stream_knee_data():
         socketio.emit('knee_data', {
             "max_knee_angle": max_knee_angle,
             "predicted_recovery_time": round(predicted_recovery_time, 2),
-            "visualization_url": f'/assets/plots/knee_progress.png'
+            "visualization_url": f'/assets/img/knee_progress.png'
         })
     except Exception as e:
         print(f"Error in stream_knee_data: {e}")
