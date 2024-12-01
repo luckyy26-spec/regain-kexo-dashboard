@@ -1,31 +1,69 @@
-
 {% extends 'base.html' %}
 
-{% block title%} Recovery Time {% endblock %}
+{% block title %} Recovery Time {% endblock %}
 
 {% block content %}
 
-  <div class="row min-vh-80">
-    <div class="col-6 mx-auto">
-      <div class="card mt-4">
+<div class="row min-vh-80">
+  <div class="col-6 mx-auto">
+    <div class="card mt-4">
 
-        <!-- Big Pink Box -->
-        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-            <h6 class="text-white text-capitalize ps-3">Measure Recovery Time</h6>
-            <p class="mb-0 text-white ps-3">
-                Welcome to the Recovery Time Measurement Dashboard</a>
-            </p>
-          </div>
+      <!-- Big Pink Box -->
+      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+          <h6 class="text-white text-capitalize ps-3">Measure Recovery Time</h6>
+          <p class="mb-0 text-white ps-3">
+            Welcome to the Recovery Time Measurement Dashboard.
+          </p>
         </div>
+      </div>
 
-        <!-- Description -->
-        <div class="card-body">
-          <p>This page is designed to provide a detailed analysis of patient progress, allowing for efficient tracking of recovery milestones and adjustments to the rehabilitation plan.<a href="https://fonts.google.com/icons">Icons for the Material Design</a> provided by Google.</p>
-          <i class="material-icons text-2xl">face</i>
+      <!-- Description -->
+      <div class="card-body">
+        <p>This page provides real-time analysis of patient progress, allowing for efficient tracking of recovery milestones and adjustments to rehabilitation plans.</p>
+
+        <!-- Prediction Display -->
+        <h5 id="prediction-text" class="text-center mt-3">Awaiting data...</h5>
+
+        <!-- Visualization -->
+        <div class="text-center mt-4">
+          <img id="visualization" src="" alt="Knee Angle Progress Visualization" class="img-fluid" style="max-width: 100%; display: none;" />
         </div>
-
       </div>
     </div>
   </div>
+</div>
+
+<!-- Real-Time Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.min.js"></script>
+<script>
+  // Establish connection with the server
+  const socket = io();
+
+  // Update the prediction text and visualization in real-time
+  socket.on('knee_data', (data) => {
+    const predictionText = document.getElementById('prediction-text');
+    const visualization = document.getElementById('visualization');
+
+    // Check for errors in the data
+    if (data.error) {
+      predictionText.textContent = `Error: ${data.error}`;
+      visualization.style.display = 'none';
+    } else {
+      // Update prediction text
+      predictionText.textContent = `Knee Angle: ${data.knee_angle}°, Predicted Recovery Time: ${data.predicted_recovery_time} weeks`;
+
+      // Update visualization (if provided)
+      if (data.visualization_url) {
+        visualization.src = data.visualization_url;
+        visualization.style.display = 'block';
+      }
+    }
+  });
+
+  // Log connection status
+  socket.on('connect', () => console.log('Connected to server.'));
+  socket.on('disconnect', () => console.log('Disconnected from server.'));
+</script>
+
 {% endblock %}
