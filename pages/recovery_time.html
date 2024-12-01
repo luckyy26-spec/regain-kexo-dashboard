@@ -27,7 +27,7 @@
 
         <!-- Visualization -->
         <div class="text-center mt-4">
-          <img id="visualization" src="" alt="Knee Angle Progress Visualization" class="img-fluid" style="max-width: 100%; display: none;" />
+          <img id="visualization" src="/assets/img/knee_progress.png" alt="Knee Angle Progress Visualization" class="img-fluid" style="max-width: 100%; display: none;" />
         </div>
       </div>
     </div>
@@ -52,8 +52,7 @@
     } else {
       // Update prediction text
       predictionText.textContent = `Knee Angle: ${data.knee_angle}°, Predicted Recovery Time: ${data.predicted_recovery_time} weeks`;
-
-      // Update visualization (if provided)
+      
       if (data.visualization_url) {
         visualization.src = data.visualization_url;
         visualization.style.display = 'block';
