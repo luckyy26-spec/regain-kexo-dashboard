@@ -4,8 +4,8 @@
 
 {% block content %}
 
-<div class="row min-vh-80">
-  <div class="col-6 mx-auto">
+<div class="row">
+  <div class="col-lg-8 col-md-10 mx-auto">
     <div class="card mt-4">
 
       <!-- Big Pink Box -->
@@ -29,7 +29,7 @@
         <h6><b>3. </b>Gradually Bend Your Knee</h6>
           <p>Slowly and steadily bend your knee to the maximum range that feels comfortable and natural. Avoid any sudden or forceful movements.</p>
           
-          <h6><b>3. </b> Check Your Progress</h6>
+          <h6><b>4. </b> Check Your Progress</h6>
         <p>Press the "Get Estimation" button on the device or app to receive your updated progress report, including detailed feedback on your rehabilitation status.</p>
 
         <!-- Prediction Display -->
@@ -68,9 +68,9 @@
   // Setup the chart
   const ctx = document.getElementById('recoveryChart').getContext('2d');
   const recoveryChart = new Chart(ctx, {
-    type: 'line', // Line chart for knee angle recovery
+    type: 'line',
     data: {
-      labels: recoveryTimeDays,  // X-axis labels as recovery time (1 to 10)
+      labels: recoveryTimeDays,  // X-axis labels as recovery time (1 to 14)
       datasets: [{
         label: 'Knee Angle Flexion',
         data: kneeAngles,  // Y-axis as knee angle flexion values
