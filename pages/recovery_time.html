@@ -4,65 +4,135 @@
 
 {% block content %}
 
-  <div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
-      <div class="card mt-4">
-
-      <!-- Big Pink Box -->
-      <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-        <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-          <h6 class="text-white text-capitalize ps-3">Measure Recovery Time</h6>
-          <p class="mb-0 text-white ps-3">
-            Welcome to the Recovery Time Measurement Dashboard.
-          </p>
-        </div>
-      </div>
-
-      <!-- Description -->
-      <div class="card-body">
-        <p>This page provides real-time analysis of patient progress, allowing for efficient tracking of recovery milestones and adjustments to rehabilitation plans.</p>
-
-        <!-- Prediction Display -->
-        <h5 id="prediction-text" class="text-center mt-3">Awaiting data...</h5>
-
-        <!-- Visualization -->
-        <div class="text-center mt-4">
-          <img id="visualization" src="/assets/img/knee_progress.png" alt="Knee Angle Progress Visualization" class="img-fluid" style="max-width: 100%; display: none;" />
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="card mt-4">
+    
+          <!-- Big Pink Box -->
+          <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+              <h6 class="text-white text-capitalize ps-3">Measure Recovery Time</h6>
+              <p class="mb-0 text-white ps-3">
+                Welcome to the Recovery Time Measurement Dashboard.
+              </p>
+            </div>
+          </div>
+    
+          <!-- Description -->
+          <div class="card-body">
+            <h6><b>1. </b>Complete the Recommended Exercises </h6>
+            <p>Follow the exercises suggested on the website to ensure proper warm-up and preparation.</p>
+    
+            <h6><b>2. </b>Find a Comfortable Position </h6>
+            <p>After completing the exercises, sit or lie down in a comfortable and stable place, such as a bed or chair.</p>
+    
+            <h6><b>3. </b>Gradually Bend Your Knee</h6>
+            <p>Slowly and steadily bend your knee to the maximum range that feels comfortable and natural. Avoid any sudden or forceful movements.</p>
+    
+            <h6><b>4. </b>Check Your Progress</h6>
+            <p>Press the "Get Estimation" button on the device or app to receive your updated progress report, including detailed feedback on your rehabilitation status.</p>
+    
+            <!-- Prediction Display -->
+            <h5 id="prediction-text" class="text-center mt-3">Waiting for prediction...</h5>
+    
+            <!-- Visualization -->
+            <div class="text-center mt-4">
+              <!-- Chart.js Canvas -->
+              <canvas id="recoveryChart" width="800" height="400"></canvas>
+            </div>
+    
+            <!-- Button -->
+            <div class="container d-flex justify-content-center py-4">
+              <div class="col-lg-3 col-sm-6 col-12 text-center">
+                <button id="countdown-btn" class="btn bg-gradient-success w-100 mb-0" type="button">Get Estimation</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- Real-Time Script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.min.js"></script>
-<script>
-  // Establish connection with the server
-  const socket = io();
-
-  // Update the prediction text and visualization in real-time
-  socket.on('knee_data', (data) => {
-    const predictionText = document.getElementById('prediction-text');
-    const visualization = document.getElementById('visualization');
-
-    // Check for errors in the data
-    if (data.error) {
-      predictionText.textContent = `Error: ${data.error}`;
-      visualization.style.display = 'none';
-    } else {
-      // Update prediction text
-      predictionText.textContent = `Knee Angle: ${data.knee_angle}°, Predicted Recovery Time: ${data.predicted_recovery_time} weeks`;
-      
-      if (data.visualization_url) {
-        visualization.src = data.visualization_url;
-        visualization.style.display = 'block';
-      }
-    }
-  });
-
+    
+    <!-- Real-Time Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.0/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+      // Establish connection with the server
+      const socket = io();
+    
+      // Prediction Display
+      const predictionText = document.getElementById('prediction-text');
+    
+      // Initial knee angles and recovery time data
+      const kneeAngles = [66.95, 81.86, 71.2, 78.39, 68.71, 82.94, 66.35, 84.37, 84.15, 81.7, 85.3, 79.6, 83.3, 90.1];
+      const recoveryTimeDays = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+    
+      // Setup the chart
+      const ctx = document.getElementById('recoveryChart').getContext('2d');
+      const recoveryChart = new Chart(ctx, {
+        type: 'line', // Line chart for knee angle recovery
+        data: {
+          labels: recoveryTimeDays,
+          datasets: [{
+            label: 'Knee Angle Flexion',
+            data: kneeAngles,
+            borderColor: 'rgb(75, 192, 192)',
+            fill: false,
+            tension: 0.1,
+            pointRadius: 5,
+            pointBackgroundColor: 'rgb(75, 192, 192)',
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Day'
+              }
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Knee Angle (Degrees)'
+              },
+              min: 0, // Set the Y-axis minimum value to 0 for better visualization
+            }
+          }
+        }
+      });
+    
+      // Handle button click
+      document.getElementById('countdown-btn').addEventListener('click', () => {
+        // Simulate a user-provided knee angle value (e.g., from a sensor or manual entry)
+        const simulatedKneeAngle = Math.floor(Math.random() * 30) + 60; // Random value between 60-90
+        
+        // Send knee angle to the server for prediction
+        predictionText.textContent = "Predicting..."; // Update text while waiting
+        socket.emit('request_prediction', { knee_angle: simulatedKneeAngle });
+      });
+    
+      // Listen for real-time data from the backend
+      socket.on('knee_data', (data) => {
+        // Check for errors in the data
+        if (data.error) {
+          predictionText.textContent = `Error: ${data.error}`;
+        } else {
+          // Update the prediction text
+          predictionText.textContent = `Knee Angle: ${data.knee_angle}°, Predicted Recovery Time: ${data.predicted_recovery_time} weeks`;
+    
+          // Update the chart with new data
+          const currentDay = recoveryChart.data.labels.length + 1; // New day for X-axis
+          recoveryChart.data.labels.push(currentDay); // Add new day label
+          recoveryChart.data.datasets[0].data.push(data.knee_angle); // Add new knee angle data point
+          recoveryChart.update(); // Update the chart to display new data
+        }
+      });
   // Log connection status
   socket.on('connect', () => console.log('Connected to server.'));
   socket.on('disconnect', () => console.log('Disconnected from server.'));
 </script>
+
 
 {% endblock %}
