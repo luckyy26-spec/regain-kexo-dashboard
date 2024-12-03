@@ -1,0 +1,94 @@
+{% macro page_iter(pages) %}
+
+    <!-- Jinja2 For loop for Navigation Bar Pages -->
+    {% for page in pages %}
+    <li class="nav-item">
+        <a class="nav-link text-dark" href="{{ url_for(page['page_url']) }}">
+            <i class="material-icons opacity-10">{{ page['page_icon'] }}</i>
+            <span class="nav-link-text ms-1">{{ page['page_name'] }}</span>
+        </a>
+    </li>
+    {% endfor %}
+
+{% endmacro %}
+
+{% macro side_navbar(page1, page2) %}
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-radius-lg fixed-start ms-2 bg-white my-2" id="sidenav-main">
+
+    <!-- Title and Icon -->
+      <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-dark opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0" href="{{ url_for('home') }}">
+          <img src="{{ url_for('static', filename='img/regain-logo-dark.png') }}" class="navbar-brand-img h-100" alt="main_logo">
+          <span class="ms-1 font-weight-bold text-dark">REGAIN K.Exo</span>
+        </a>
+      </div>
+      <hr class="horizontal dark mt-0">
+
+      <!-- Side Navbar Pages -->
+      <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+            {{ page_iter(page1) }}
+
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="#">
+                    <i class="material-icons opacity-10">notifications</i>
+                  <span class="nav-link-text ms-1">Auto-Assist</span>
+                  <div class="form-check form-switch ms-3">
+                    <input class="form-check-input" type="checkbox" id="motorToggle" onclick="toggleMotor(this.checked)">
+                    <label class="form-check-label" for="motorToggle"></label>
+                  </div>
+                </a>
+              </li>
+              
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs text-dark font-weight-bolder opacity-5">Exercises</h6>
+            </li>
+            {{ page_iter(page2) }}
+        </ul>
+      </div>
+
+      <!-- Side Navbar Footer -->
+      <div class="sidenav-footer position-absolute w-100 bottom-0 ">
+        <div class="mx-3">
+          <a class="btn bg-gradient-dark w-100" href="#" type="button">Read Documentation</a>
+        </div>
+      </div>
+
+  </aside>
+{% endmacro %}
+
+{% macro info_box(title, content) %}
+    <div class="col-xl-6 col-sm-6 mb-xl-4 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <div class="pt-4">
+                    <h5 class="mb-0">{{title}}</h5>
+                </div>
+            </div>
+            <hr class="dark horizontal my-0">
+            <div class="card-footer p-4">
+                <!-- filter data to allow line breaks, and change * bullet design -->
+                <p>{{content | replace('\n', '<br>') | replace( '*','<span class="text-success text-sm font-weight-bolder">◉ </span>') | safe }}</p>
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro knee_data(data_name, data) %}
+    <div class="col-xl-3 col-sm-6 mb-xl-4 mb-3">
+        <div class="card">
+            <div class="card-header card-footer p-4 ps-4">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="text-sm mb-0 text-capitalize">{{ data_name }}</p>
+                        <h4 class="mb-0">{{ data }}</h4>
+                    </div>
+                    <div>
+                        <i class="material-icons opacity-10">sensors</i>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+{% endmacro %}

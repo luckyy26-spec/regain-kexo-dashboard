@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %} Recovery Time {% endblock %}
+
+{% block content %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/static/js/socket.js"></script>
+    <script src="/static/js/chart-design.js"></script>
+    <script src="/static/js/chart-update.js"></script>
+    <script src="/static/js/predict-button.js"></script>
+
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="card mt-4">
+
+             <div class="card-body p-3">
+            <div class="ratio ratio-16x9">
+              <video controls width="100%">
+                <source src="../assets/bend_knee.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+                 
+          <!-- Big Pink Box -->
+          <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+              <h6 class="text-white text-capitalize ps-3">Measure Recovery Time</h6>
+              <p class="mb-0 text-white ps-3">
+                Welcome to the Recovery Time Measurement Dashboard.
+              </p>
+            </div>
+          </div>
+    
+          <!-- Description -->
+          <div class="card-body">
+            <h6><b>1. </b>Complete the Recommended Exercises </h6>
+            <p>Follow the exercises suggested on the website to ensure proper warm-up and preparation.</p>
+    
+            <h6><b>2. </b>Find a Comfortable Position </h6>
+            <p>After completing the exercises, sit or lie down in a comfortable and stable place, such as a bed or chair.</p>
+    
+            <h6><b>3. </b>Gradually Bend Your Knee</h6>
+            <p>Slowly and steadily bend your knee to the maximum range that feels comfortable and natural. Avoid any sudden or forceful movements.</p>
+    
+            <h6><b>4. </b>Check Your Progress</h6>
+            <p>Press the "Get Estimation" button on the device or app to receive your updated progress report, including detailed feedback on your rehabilitation status.</p>
+    
+            <!-- Prediction Display -->
+            <h5 id="predictionParagraph" class="text-center mt-3">Waiting for prediction...</h5>
+    
+            <!-- Visualization -->
+            <div class="text-center mt-4">
+              <!-- Chart.js Canvas -->
+              <canvas id="recoveryChart" width="800" height="400"></canvas>
+            </div>
+    
+            <!-- Button -->
+            <div class="container d-flex justify-content-center py-4">
+              <div class="col-lg-3 col-sm-6 col-12 text-center">
+                <button id="predictButton" class="btn bg-gradient-success w-100 mb-0" type="button">Get Estimation</button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
