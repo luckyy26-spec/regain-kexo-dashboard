@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO
 from knee_data import get_knee_data
+from time_recovery import predict_recovery
 
 # Flask app setup
 app = Flask(
@@ -11,6 +12,25 @@ app = Flask(
 )
 socketio = SocketIO(app)
 
+def predict():
+    try:
+        # Extract data sent from the client
+        max_knee_angle = request.json.get('max_knee_angle', None)
+
+        # Validate input
+        if max_knee_angle is None:
+            return jsonify({'error': 'Invalid input'}), 400
+
+        # Call the prediction function
+        prediction = predict_recovery(max_knee_angle)
+
+        # Return the prediction
+        return jsonify({'prediction': prediction})
+    except ValueError as ve:
+        return jsonify({'error': str(ve)}), 500
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
 pages = [{
         "page_url": "dashboard",
         "page_icon": "dashboard",
