@@ -59,6 +59,10 @@ def sit_to_stand():
 def assisted_walking():
     return render_template('exer_assisted_walking.html', pages=pages, exercises=exercises)
 
+@app.route('/imrad')
+def imrad():
+    return render_template('imrad.html')
+
 @socketio.on('connect')
 def handle_connect():
     print('Client connected')
