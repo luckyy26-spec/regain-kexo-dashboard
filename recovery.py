@@ -65,14 +65,14 @@ def process_real_time_data(knee_angle):
     predicted_recovery_time = rf_model.predict([[knee_angle]])
 
     # Generate visualization
-    plt.figure(figsize=(8, 6))
-    plt.scatter(rf_model.feature_importances_, rf_model.oob_score_, alpha=0.7, color='blue')
-    plt.axvline(x=knee_angle, color='red', linestyle='--', label=f'Input Knee Angle: {knee_angle}')
-    plt.title('Max Knee Flexion vs Recovery Time')
-    plt.xlabel('Max Knee Flexion (degrees)')
-    plt.ylabel('Recovery Time (weeks)')
-    plt.legend()
-    plt.grid(True)
+    # plt.figure(figsize=(8, 6))
+    # plt.scatter(rf_model.feature_importances_, rf_model.oob_score_, alpha=0.7, color='blue')
+    # plt.axvline(x=knee_angle, color='red', linestyle='--', label=f'Input Knee Angle: {knee_angle}')
+    # plt.title('Max Knee Flexion vs Recovery Time')
+    # plt.xlabel('Max Knee Flexion (degrees)')
+    # plt.ylabel('Recovery Time (weeks)')
+    # plt.legend()
+    # plt.grid(True)
 
     # Save plot to static folder
     plot_path = os.path.join(app.static_folder, 'images', 'real_time_visualization.png')
